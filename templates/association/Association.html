@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+	<h1>Associations</h1>
+    <a class="btn btn-primary" href="addAssociation/">Add Association<a/>
+    <div class="card card-body border-0 shadow table-wrapper table-responsive my-3 ">
+      <table class="table table-hover">
+
+          <thead>
+              <tr>
+                  <th class="border-gray-200">#</th>
+                  <th class="border-gray-200">Name</th>
+                  <th class="border-gray-200">Type</th>
+                  <th class="border-gray-200">Headquarters</th>
+                  <th class="border-gray-200">View</th>
+                  <th class="border-gray-200">Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for x in association %}
+              <!-- Item -->
+              <tr>
+                  <td>
+                      <a href="#" class="fw-bold">
+                          {{ x.id }}
+                      </a>
+                  </td>
+                  <td>
+                      <span class="fw-normal">{{ x.name }}</span>
+                  </td>
+                  <td><span class="fw-normal">{{ x.type }}</span></td>
+                  <td><span class="fw-normal">{{ x.headquarters }}</span></td>
+                  <td>
+                      <div class="btn-group">
+                          <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span class="icon icon-sm">
+                                  <span class="fas fa-ellipsis-h icon-dark"></span>
+                              </span>
+                              <span class="visible">Toggle Dropdown</span>
+                          </button>
+                          <div class="dropdown-menu py-0">
+                              <a class="dropdown-item rounded-top" href="#"><span class="fas fa-eye me-2"></span>View Details</a>
+                              <a class="dropdown-item" href="update/{{ x.id }}"><span class="fas fa-edit me-2"></span>Edit</a>
+                              <a class="dropdown-item text-danger rounded-bottom" href="delete/{{ x.id }}"><span class="fas fa-trash-alt me-2"></span>Remove</a>
+                          </div>
+                      </div>
+                  </td>
+              </tr>
+              <!-- Item -->
+          {% endfor %}
+          </tbody>
+
+      </table>
+    </div>
+
+{% endblock content %}

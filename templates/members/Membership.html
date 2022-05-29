@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+{% block content%}
+	<h1>Members</h1>
+	<table class="table table-dark table-sm">
+		{% for x in membership %}
+		<tr>
+			<td>{{ x.id }}</td>
+			<td>{{ x.association_id_id}}</td>
+			<td>{{ x.club_id_id }}</td>
+			<td>{{ x.status }}</td>
+			<td><a href="update/{{ x.id }}">update</a></td>
+			<td><a href="delete/{{ x.id }}">delete</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<button class="btn btn-outline"><a href="add/">Create Membership</a></button>
+{% endblock content %}
+

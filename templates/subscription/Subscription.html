@@ -1,20 +1,60 @@
 {% extends 'layouts/base.html' %}
-{% block content%}
+{% block content %}
 	<h1>Subscriptions</h1>
-	<table class="table table-dark table-sm">
-		{% for x in subscription %}
-		<tr>
-			<td>{{ x.id }}</td>
-			<td>{{ x.membership_id_id }}</td>
-			<td>{{ x.club_id_id }}</td>
-			<td>{{ x.status }}</td>
-            <td>{{ x.start_date }}</td>
-            <td>{{ x.end_date }}</td>
-			<td><a href="update/{{ x.id }}">update</a></td>
-			<td><a href="delete/{{ x.id }}">delete</a></td>
-		</tr>
-		{% endfor %}
-	</table>
-	<button class="btn btn-outline"><a href="add/">Add Subscription</a></button>
+    <a class="btn btn-primary" href="add/">Add Subscription<a/>
+    <div class="card card-body border-0 shadow table-wrapper table-responsive my-3 ">
+      <table class="table table-hover">
+
+          <thead>
+              <tr>
+                  <th class="border-gray-200">#</th>
+                  <th class="border-gray-200">Membership</th>
+                  <th class="border-gray-200">Club</th>
+                  <th class="border-gray-200">Status</th>
+                  <th class="border-gray-200">Start Date</th>
+                  <th class="border-gray-200">End Date</th>
+                  <th class="border-gray-200">View</th>
+                  <th class="border-gray-200">Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for x in subscription %}
+              <!-- Item -->
+              <tr>
+                  <td>
+                      <a href="#" class="fw-bold">
+                          {{ x.id }}
+                      </a>
+                  </td>
+                  <td>
+                      <span class="fw-normal">{{ x.membership_id_id }}</span>
+                  </td>
+                  <td><span class="fw-normal">{{ x.club_id_id }}</span></td>
+                  <td><span class="fw-normal">{{ x.status }}</span></td>
+                  <td><span class="fw-normal">{{ x.start_date }}</span></td>
+                  <td><span class="fw-normal">{{ x.end_date }}</span></td>
+                  <td>
+                      <div class="btn-group">
+                          <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span class="icon icon-sm">
+                                  <span class="fas fa-ellipsis-h icon-dark"></span>
+                              </span>
+                              <span class="visible">Toggle Dropdown</span>
+                          </button>
+                          <div class="dropdown-menu py-0">
+                              <a class="dropdown-item rounded-top" href="#"><span class="fas fa-eye me-2"></span>View Details</a>
+                              <a class="dropdown-item" href="update/{{ x.id }}"><span class="fas fa-edit me-2"></span>Edit</a>
+                              <a class="dropdown-item text-danger rounded-bottom" href="delete/{{ x.id }}"><span class="fas fa-trash-alt me-2"></span>Remove</a>
+                          </div>
+                      </div>
+                  </td>
+              </tr>
+              <!-- Item -->
+          {% endfor %}
+          </tbody>
+
+      </table>
+    </div>
+
 {% endblock content %}
 

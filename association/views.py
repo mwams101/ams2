@@ -27,7 +27,7 @@ def addAssociation(request):
         form = AssociationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('indexAssociation')
 
     context = {'form': form}
     return render(request, 'association/addAssociation.html', context)
@@ -42,7 +42,7 @@ def updateAssociation(request, id):
         form = AssociationForm(request.POST, instance=association)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('indexAssociation')
 
     context = {'form': form}
     return render(request, 'association/addAssociation.html', context)
@@ -54,7 +54,7 @@ def deleteAssociation(request, id):
 
     if request.method == 'POST':
         association.delete()
-        return redirect('index')
+        return redirect('indexAssociation')
 
     context = {'item': association}
     return render(request, 'association/delete.html', context)
@@ -176,7 +176,7 @@ def deleteMembership(request, id):
 @login_required(login_url='/login')
 def indexSubscription(request):
     subscription = Subscription.objects.all().values()
-    template = loader.get_template("mubscription/Subscription.html")
+    template = loader.get_template("subscription/Subscription.html")
 
     context = {
         'subscription': subscription,

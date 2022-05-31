@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, widgets
 from .models import Association, AssociationStaff, Event, Subscription, Membership
 
 
@@ -6,6 +6,7 @@ class AssociationForm(ModelForm):
     class Meta:
         model = Association
         fields = '__all__'
+        # name = forms.TextInput(attrs={'class':'form-control'})
 
 
 class AssociationStaffForm(ModelForm):

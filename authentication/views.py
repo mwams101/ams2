@@ -17,11 +17,11 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect("dashboard")
             else:
-                msg = 'Invalid credentials'
+                msg = '<p style="color:red">Invalid credentials</p>'
         else:
-            msg = 'Error validating the form'
+            msg = '<p style="color: red ;">Error validating the form</p>'
 
     return render(request, "accounts/login.html", {"form": form, "msg": msg})
 
@@ -38,13 +38,13 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
 
-            msg = 'User created - please <a href="/login">login</a>.'
+            msg = 'User created - please <a href="/login" style="color:red;">login</a>.'
             success = True
 
             # return redirect("/login/")
 
         else:
-            msg = 'Form is not valid'
+            msg = '<p style="color:red;">Form is not valid</p>'
     else:
         form = SignUpForm()
 

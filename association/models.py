@@ -4,8 +4,7 @@ from members.models import Club
 
 
 class Association(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255, null=True)
+    name = models.CharField(max_length=255, null=True, unique=True)
     type = models.CharField(max_length=255, null=True)
     headquarters = models.CharField(max_length=255, null=True)
 

@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Club(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255, null=True)
+    name = models.CharField(max_length=255, null=True, unique=True)
     address = models.CharField(max_length=255, null=True)
 
     def __str__(self):

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'association.apps.AssociationConfig',
     'authentication.apps.AuthenticationConfig',
     'members.apps.MembersConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [

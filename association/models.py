@@ -24,7 +24,6 @@ class AssociationStaff(models.Model):
 class Membership(models.Model):
     association_id = models.ForeignKey(Association, on_delete=models.CASCADE)
     club_id = models.ForeignKey(Club, on_delete=models.CASCADE)
-    status = models.CharField(max_length=255, null=True)
 
 
 class Subscription(models.Model):

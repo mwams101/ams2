@@ -1,6 +1,7 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
 	<h1>Associations</h1>
+    <a href="{% url 'export-excel' %}" class="btn btn-info">export excel</a>
     <a class="btn btn-primary" href="addAssociation/">Add Association<a/>
     <div class="card card-body border-0 shadow table-wrapper table-responsive my-3 ">
       <table class="table table-hover">

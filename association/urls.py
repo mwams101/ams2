@@ -8,6 +8,7 @@ urlpatterns = [
     path('association/addAssociation/', views.addAssociation, name='addAssociation'),
     path('association/update/<int:id>', views.updateAssociation, name='update'),
     path('association/delete/<int:id>', views.deleteAssociation, name='deleteAssociation'),
+    path('association/export', views.exportExcel, name='export-excel'),
 
     # Association Staff Paths
 

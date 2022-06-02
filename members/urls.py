@@ -8,6 +8,7 @@ urlpatterns = [
     path('club/add/', views.addClub, name='addClub'),
     path('club/update/<int:id>', views.updateClub, name='updateClub'),
     path('club/delete/<int:id>', views.deleteClub, name='deleteClub'),
+    path('club/export', views.exportClub, name='export-club'),
 
     # Club Staff Paths
 

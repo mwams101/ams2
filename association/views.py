@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.template import loader
+import datetime, xlwt
 
 
 # Create your views here.
@@ -278,3 +279,36 @@ def deleteEvent(request, id):
 
     context = {'item': event}
     return render(request, 'events/delete.html', context)
+
+######################################################################################
+# Export to Excel
+
+def exportExcel(request):
+
+    response = HttpResponse(content_type="application/ms-excel")
+    response['Content-Disposition'] = 'attachment; Filename=Associations' + \
+        str(datetime.datetime.now())+'.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Spreadsheet')
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+    columns = ['Name', 'Type', 'Headquarters']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    font_style = xlwt.XFStyle()
+    rows = Association.objects.values_list('name', 'type', 'headquarters')
+
+    for row in rows:
+        row_num += 1
+
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, str(row[col_num]), font_style)
+    wb.save(response)
+
+    return response
+
+
+

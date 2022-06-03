@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+{% block content%}
+
+	<p>Are you Sure you want to delete "{{ item }}"</p>
+
+	<form action="{% url 'deleteClubStaff' item.id %}" method="post">
+        {% csrf_token %}
+		<a href="{% url 'indexClubStaff' %}">Cancel</a>
+		<input type="submit" name="confirm">
+	</form>
+
+{% endblock content%}

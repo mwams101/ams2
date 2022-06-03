@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+	<h1>Clubs</h1>
+    <a href="{% url 'export-club' %}" class="btn btn-info">export excel</a>
+    <a class="btn btn-primary" href="add/">Add Club<a/>
+    <div class="card card-body border-0 shadow table-wrapper table-responsive my-3 ">
+      <table class="table table-hover">
+
+          <thead>
+              <tr>
+                  <th class="border-gray-200">#</th>
+                  <th class="border-gray-200">Name</th>
+                  <th class="border-gray-200">Address</th>
+                  <th class="border-gray-200">View</th>
+                  <th class="border-gray-200">Edit</th>
+                  <th class="border-gray-200">Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for x in club %}
+              <!-- Item -->
+              <tr>
+                  <td>
+                      <a href="#" class="fw-bold">
+                          {{ x.id }}
+                      </a>
+                  </td>
+                  <td>
+                      <span class="fw-normal">{{ x.name }}</span>
+                  </td>
+                  <td><span class="fw-normal">{{ x.address }}</span></td>
+                  <td><a class="btn btn-primary" href="#"><span class="fw-normal">View Details</span></a></td>
+                  <td><a class="btn btn-secondary" href="update/{{ x.id }}"><span class="fw-normal">Edit</span></a></td>
+                  <td><a class="btn btn-danger" href="delete/{{ x.id }}"><span class="fw-normal">Delete</span></a></td>
+              </tr>
+              <!-- Item -->
+          {% endfor %}
+          </tbody>
+
+      </table>
+    </div>
+
+{% endblock content %}
+

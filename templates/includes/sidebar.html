@@ -1,4 +1,6 @@
-        <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
+
+
+       <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
             <a class="navbar-brand me-lg-5" href="/apps/static">
                 <img class="navbar-brand-dark" src="/static/assets/img/brand/light.svg" alt="Volt logo" /> <img class="navbar-brand-light" src="/static/assets/img/brand/dark.svg" alt="Volt logo" />
             </a>
@@ -84,6 +86,8 @@
                 <div class="multi-level collapse {% if 'association' in segment %} show {% endif %}"
                   role="list" id="submenu-app" aria-expanded="false">
                   <ul class="flex-column nav">
+                  {% for group in  request.user.groups.all %}
+                  {%  if 'admin' == group.name %}
                     <li class="nav-item {% if 'association' in segment %} active {% endif %}">
                       <a class="nav-link" href="{% url 'indexAssociation' %}">
                         <span class="sidebar-text">Association</span>
@@ -94,11 +98,15 @@
                         <span class="sidebar-text">Association Staff</span>
                       </a>
                     </li>
+                  {% endif %}
+                  {% endfor %}
                     <li class="nav-item {% if 'event' in segment %} active {% endif %}">
                       <a class="nav-link" href="{% url 'indexEvent' %}">
                         <span class="sidebar-text">Events</span>
                       </a>
                     </li>
+                  {% for group in  request.user.groups.all %}
+                  {%  if 'admin' == group.name %}
                     <li class="nav-item {% if 'membership' in segment %} active {% endif %}">
                       <a class="nav-link" href="{% url 'indexMembership' %}">
                         <span class="sidebar-text">Membership</span>
@@ -109,6 +117,8 @@
                         <span class="sidebar-text">Subscription</span>
                       </a>
                     </li>
+                  {% endif %}
+                  {% endfor %}
                   </ul>
                 </div>
               </li>
@@ -130,11 +140,15 @@
                 <div class="multi-level collapse {% if 'club' in segment %} show {% endif %}"
                   role="list" id="submenu-members" aria-expanded="false">
                   <ul class="flex-column nav">
+                  {% for group in  request.user.groups.all %}
+                  {%  if 'admin' == group.name %}
                     <li class="nav-item {% if 'club' in segment %} active {% endif %}">
                       <a class="nav-link" href="{% url 'indexClub' %}">
                         <span class="sidebar-text">Clubs</span>
                       </a>
                     </li>
+                  {% endif %}
+                  {% endfor %}
                     <li class="nav-item {% if 'club' in segment %} active {% endif %}">
                       <a class="nav-link" href="{% url 'indexClubStaff' %}">
                         <span class="sidebar-text">Club Staff</span>

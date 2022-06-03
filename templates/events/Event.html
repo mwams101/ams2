@@ -1,7 +1,13 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
 	<h1>Events</h1>
+
+    {% for group in  request.user.groups.all %}
+    {%  if 'admin' == group.name %}
     <a class="btn btn-primary" href="add/">Add Event<a/>
+    {% endif %}
+    {% endfor %}
+
     <div class="card card-body border-0 shadow table-wrapper table-responsive my-3 ">
       <table class="table table-hover">
 
@@ -13,8 +19,14 @@
                   <th class="border-gray-200">Date</th>
                   <th class="border-gray-200">Description</th>
                   <th class="border-gray-200">View</th>
+
+                  {% for group in  request.user.groups.all %}
+                  {%  if 'admin' == group.name %}
                   <th class="border-gray-200">Edit</th>
                   <th class="border-gray-200">Delete</th>
+                  {% endif %}
+                  {% endfor %}
+
               </tr>
           </thead>
           <tbody>
@@ -33,8 +45,14 @@
                   <td><span class="fw-normal">{{ x.date }}</span></td>
                   <td><span class="fw-normal">{{ x.description }}</span></td>
                   <td><a class="btn btn-primary" href="#"><span class="fw-normal">View Details</span></a></td>
+
+                  {% for group in  request.user.groups.all %}
+                  {%  if 'admin' == group.name %}
                   <td><a class="btn btn-secondary" href="update/{{ x.id }}"><span class="fw-normal">Edit</span></a></td>
                   <td><a class="btn btn-danger" href="delete/{{ x.id }}"><span class="fw-normal">Delete</span></a></td>
+                  {% endif %}
+                  {% endfor %}
+
               </tr>
               <!-- Item -->
           {% endfor %}

@@ -3,9 +3,9 @@
 
 	<p>Are you Sure you want to delete "{{ item }}"</p>
 
-	<form action="{% url 'delete' item.id %}" method="post">
+	<form action="{% url 'deleteSubscription' item.id %}" method="post">
         {% csrf_token %}
-		<a href="{% url 'indexAssociationStaff' %}">Cancel</a>
+		<a href="{% url 'indexSubscription' %}">Cancel</a>
 		<input type="submit" name="confirm">
 	</form>
 

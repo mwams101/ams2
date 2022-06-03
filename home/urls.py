@@ -8,6 +8,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('settings/', views.settings, name='settings'),
     path('settings/updateSettings/<int:id>', views.updateSettings, name='updateSettings'),
-    # path('page-reset-password/', views.password, name='password'),
+    path('add-user/', views.addUser, name='addUser'),
     # # path('page-reset-password/<int:id>', views.changePassword, name='changePassword'),
 ]

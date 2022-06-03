@@ -6,10 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.template import loader
 import datetime, xlwt
+from authentication.decorator import allowed_user
 
 
 # Create your views here.
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def indexAssociation(request):
     association = Association.objects.all().values()
     template = loader.get_template("association/Association.html")
@@ -22,6 +24,7 @@ def indexAssociation(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def addAssociation(request):
     form = AssociationForm()
     if request.method == 'POST':
@@ -35,6 +38,7 @@ def addAssociation(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def updateAssociation(request, id):
     association = Association.objects.get(id=id)
     form = AssociationForm(instance=association)
@@ -50,6 +54,7 @@ def updateAssociation(request, id):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def deleteAssociation(request, id):
     association = Association.objects.get(id=id)
 
@@ -65,6 +70,7 @@ def deleteAssociation(request, id):
 # Association Staff Views
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def indexAssociationStaff(request):
     association = AssociationStaff.objects.all().values()
     template = loader.get_template("associationStaff/AssociationStaff.html")
@@ -77,6 +83,7 @@ def indexAssociationStaff(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def addAssociationStaff(request):
     form = AssociationStaffForm()
     if request.method == 'POST':
@@ -90,6 +97,7 @@ def addAssociationStaff(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def updateAssociationStaff(request, id):
     association = AssociationStaff.objects.get(id=id)
     form = AssociationStaffForm(instance=association)
@@ -105,6 +113,7 @@ def updateAssociationStaff(request, id):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def deleteAssociationStaff(request, id):
     association = AssociationStaff.objects.get(id=id)
 
@@ -120,6 +129,7 @@ def deleteAssociationStaff(request, id):
 # Membership Views
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def indexMembership(request):
     membership = Membership.objects.all().values()
     template = loader.get_template("membership/Membership.html")
@@ -132,6 +142,7 @@ def indexMembership(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def addMembership(request):
     form = MembershipForm()
     if request.method == 'POST':
@@ -145,6 +156,7 @@ def addMembership(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def updateMembership(request, id):
     membership = Membership.objects.get(id=id)
     form = MembershipForm(instance=membership)
@@ -160,6 +172,7 @@ def updateMembership(request, id):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def deleteMembership(request, id):
     membership = Membership.objects.get(id=id)
 
@@ -175,6 +188,7 @@ def deleteMembership(request, id):
 # Subscription Views
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def indexSubscription(request):
     subscription = Subscription.objects.all().values()
     template = loader.get_template("subscription/Subscription.html")
@@ -187,6 +201,7 @@ def indexSubscription(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def addSubscription(request):
     form = SubscriptionForm()
     if request.method == 'POST':
@@ -200,6 +215,7 @@ def addSubscription(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def updateSubscription(request, id):
     subscription = Subscription.objects.get(id=id)
     form = SubscriptionForm(instance=subscription)
@@ -215,6 +231,7 @@ def updateSubscription(request, id):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def deleteSubscription(request, id):
     subscription = Subscription.objects.get(id=id)
 
@@ -242,6 +259,7 @@ def indexEvent(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def addEvent(request):
     form = EventForm()
     if request.method == 'POST':
@@ -255,6 +273,7 @@ def addEvent(request):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def updateEvent(request, id):
     event = Event.objects.get(id=id)
     form = EventForm(instance=event)
@@ -270,6 +289,7 @@ def updateEvent(request, id):
 
 
 @login_required(login_url='/login')
+@allowed_user(allowed_roles=['admin'])
 def deleteEvent(request, id):
     event = Event.objects.get(id=id)
 
@@ -288,6 +308,7 @@ def exportExcel(request):
     response = HttpResponse(content_type="application/ms-excel")
     response['Content-Disposition'] = 'attachment; Filename=Associations' + \
         str(datetime.datetime.now())+'.xls'
+
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Spreadsheet')
     row_num = 0

@@ -1,7 +1,10 @@
-
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
 
 
 def login_view(request):
@@ -37,6 +40,8 @@ def register_user(request):
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
+            group = Group.objects.get(name='admin')
+            user.groups.add(group)
 
             msg = 'User created - please <a href="/login" style="color:red;">login</a>.'
             success = True
@@ -49,6 +54,3 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
-
-
-# Create your views here.
